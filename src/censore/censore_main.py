@@ -21,7 +21,3 @@ def check_censoring(sentence_str):
 
     return bad_words
 
-
-sentence = "mata e curva"
-
-print(check_censoring(sentence))
