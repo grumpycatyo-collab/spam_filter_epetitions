@@ -1,8 +1,10 @@
-from difflib import get_close_matches,SequenceMatcher
-from better_profanity import profanity
-route = 'data\md_ro.txt'
-with open(route, 'r', encoding='utf-8') as file:
-        censored_words = file.read().splitlines()
+from difflib import get_close_matches
+
+route = r'C:\Users\Max\spam_filter_epetitions\data\md_ro.txt'
+# replace route with your desired route (i have problems with route)
+file = open(route, 'r', encoding='utf-8')
+censored_words = file.read().splitlines()
+
 
 def is_it_similar(word):
     """
@@ -14,12 +16,10 @@ def is_it_similar(word):
     Returns:
         bool: True if the word is similar to at least two censored words, False otherwise.
     """
-    
+
     word = word.lower()
-    length = len(get_close_matches(word,censored_words,cutoff=0.75))
-    if length>=2:
+    length = len(get_close_matches(word, censored_words, cutoff=0.75))
+    if length >= 2:
         return True
     else:
         return False
-
-

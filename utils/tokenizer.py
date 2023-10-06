@@ -1,6 +1,7 @@
 import nltk
-import re   
+import re
 from nltk.tokenize import word_tokenize
+
 
 def remove_special_symbols(text):
     """
@@ -9,11 +10,12 @@ def remove_special_symbols(text):
         text (str): The input text containing special symbols.
     Returns:
         str: The cleaned text with special symbols removed.
-    """ 
-    pattern = r'[^a-zA-Z0-9\s]'  
-     
+    """
+    pattern = r'[^a-zA-Z0-9\s]'
+
     cleaned_text = re.sub(pattern, ' ', text)
     return cleaned_text
+
 
 def tokenize_sentence(sentence):
     """
@@ -25,8 +27,8 @@ def tokenize_sentence(sentence):
     Returns:
         list: A list of words obtained after tokenization.
     """
-    
+
     nltk.download('punkt', quiet=True)
-    
+
     words = word_tokenize(remove_special_symbols(sentence))
     return words
