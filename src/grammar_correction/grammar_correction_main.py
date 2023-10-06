@@ -1,13 +1,12 @@
 import language_tool_python
 
-tool = language_tool_python.LanguageTool('ro-RO')
 
-
-def check_grammar_mistakes(seq):
+def check_grammar_mistakes(seq, lang):
     """
        Checks for grammar mistakes in a given sequence.
 
        Parameters:
+           lang (str): Stands for language
            seq (str): The input sequence to be checked for grammar mistakes.
 
        Returns:
@@ -17,6 +16,7 @@ def check_grammar_mistakes(seq):
            This function uses a grammar checking tool to analyze the input sequence.
            It returns True if one or more grammar mistakes are found, and False otherwise.
        """
+    tool = language_tool_python.LanguageTool(lang)
     errors = tool.check(seq)
     if len(errors) == 0:
         return False
@@ -24,11 +24,12 @@ def check_grammar_mistakes(seq):
         return True
 
 
-def print_suggestions(seq):
+def print_suggestions(seq, lang):
     """
         Generate a list of error suggestions for a given sequence.
 
         Args:
+            lang (str): Stands for language
             seq (str): The input sequence to be checked for errors.
 
         Returns:
@@ -39,6 +40,7 @@ def print_suggestions(seq):
                     "suggestions": list[str]    # List of suggested replacements.
                 }
     """
+    tool = language_tool_python.LanguageTool(lang)
     matches_data = []
     errors = tool.check(seq)
     for error in errors:
@@ -49,11 +51,12 @@ def print_suggestions(seq):
     return matches_data
 
 
-def print_error_location(seq):
+def print_error_location(seq, lang):
     """
        Generate error location information for a given sequence.
 
        Args:
+           lang (str): Stands for language string you will be using 'ro-RO'/'ru-RU'
            seq (str): The input sequence to be checked for errors.
 
        Returns:
@@ -65,6 +68,7 @@ def print_error_location(seq):
                    "errorLength": int       # The length of the error.
                }
     """
+    tool = language_tool_python.LanguageTool(lang)
     matches_data = []
     errors = tool.check(seq)
     for error in errors:
@@ -72,5 +76,15 @@ def print_error_location(seq):
             "offsetInContext": error.offsetInContext,
             "offset": error.offset,
             "errorLength": error.errorLength
+
         })
     return matches_data
+
+seq = "Îmi place să ciesc cărți în grădină în zilele călduroase de vară"
+tool = language_tool_python.LanguageTool('ro-RO')
+matches_data = []
+errors = tool.check(seq)
+for err in errors:
+    print(err)
+
+print(print_error_location(seq, 'ro-RO'))

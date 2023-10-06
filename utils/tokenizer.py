@@ -11,7 +11,7 @@ def remove_special_symbols(text):
     Returns:
         str: The cleaned text with special symbols removed.
     """
-    pattern = r'[^a-zA-Z0-9\s]'
+    pattern = r'[^\w\sа-яА-Яa-zA-Z0-9]'
 
     cleaned_text = re.sub(pattern, ' ', text)
     return cleaned_text

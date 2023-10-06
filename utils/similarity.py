@@ -1,9 +1,18 @@
 from difflib import get_close_matches
+import re
 
-route = r'C:\Users\Max\spam_filter_epetitions\data\md_ro.txt'
-# replace route with your desired route (i have problems with route)
-file = open(route, 'r', encoding='utf-8')
-censored_words = file.read().splitlines()
+route_ro = r'C:\Users\Max\spam_filter_epetitions\data\md_ro.txt'
+route_ru = r'C:\Users\Max\spam_filter_epetitions\data\rus.txt'
+
+file1 = open(route_ro, 'r', encoding='utf-8')
+censored_words_ro = file1.read().splitlines()
+
+file2 = open(route_ru, 'r', encoding='utf-8')
+censored_words_ru = file2.read().splitlines()
+
+
+def has_cyrillic(text):
+    return bool(re.search('[а-яА-Я]', text))
 
 
 def is_it_similar(word):
@@ -18,7 +27,12 @@ def is_it_similar(word):
     """
 
     word = word.lower()
-    length = len(get_close_matches(word, censored_words, cutoff=0.75))
+    if has_cyrillic(word):
+        print("rus")
+        length = len(get_close_matches(word, censored_words_ru, cutoff=0.50))
+    else:
+        print("ro")
+        length = len(get_close_matches(word, censored_words_ro, cutoff=0.75))
     if length >= 2:
         return True
     else:
