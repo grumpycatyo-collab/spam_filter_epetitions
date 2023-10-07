@@ -1,7 +1,7 @@
 import asyncio
 
 from src.censore.censore_main import check_censoring
-from src.grammar_correction.grammar_correction_main import check_grammar_mistakes
+from src.grammar_correction.grammar_correction_main import print_all_necessary
 from src.websocket.server import server
 from utils.similarity import has_cyrillic
 
@@ -9,15 +9,10 @@ from utils.similarity import has_cyrillic
 async def echo(websocket) -> None:
     async for message in websocket:
         if has_cyrillic(message):
-            grammar_result = check_grammar_mistakes(message, 'ru-RU')
+            grammar_result = print_all_necessary(message, 'ru-RU')
         else:
-            grammar_result = check_grammar_mistakes(message, 'ro-RO')
+            grammar_result = print_all_necessary(message, 'ro-RO')
         censoring_result = check_censoring(message)
-
-        # result = {
-        #     "censoring": censoring_result,
-        #     "grammar": grammar_result
-        # }
         string = f'{censoring_result} / {grammar_result}'
         await websocket.send(string)
 
