@@ -3,12 +3,10 @@ Spam Filter is a microservice made specifically for the E-petitions Project made
 
 ## Contents
 - [Conventions](#conventions)
-- [RPC Methods](#rpc-methods)
-- [Login](#login)
-- [RefreshSession](#refreshsession)
-- [ValidateToken](#validatetoken)
-- [SendOTP](#sendotp)
-- [ValidateOTP](#validateotp)
-
+- [Run Project](#runproject)
+  
 ## Conventions
 Spam Filter is developed to use the Web Sockets, thus to try it, just connect to Postman and initialize the web-socket route
+
+## Run Project
+
