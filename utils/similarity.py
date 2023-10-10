@@ -29,7 +29,7 @@ def is_it_similar(word):
     word = word.lower()
     if has_cyrillic(word):
         print("rus")
-        length = len(get_close_matches(word, censored_words_ru, cutoff=0.50))
+        length = len(get_close_matches(word, censored_words_ru, cutoff=0.60))
     else:
         print("ro")
         length = len(get_close_matches(word, censored_words_ro, cutoff=0.75))
