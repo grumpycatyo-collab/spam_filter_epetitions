@@ -6,6 +6,7 @@ Spam Filter is a microservice made specifically for the E-petitions Project made
 - [Run Project](#runproject)
 - [Usages](#usages)
 - [Data](#data)
+- [Contributors and Contributions](#contributors-and-contributions)
   
 ## Conventions
 Spam Filter is developed to use the Web Sockets, thus to try it, just connect to Postman and initialize the web-socket route
@@ -18,6 +19,9 @@ Spam Filter is developed to use the Web Sockets, thus to try it, just connect to
 - Push 'Connect' and good to go.
 
 ## Usages
+
+> ALERT: A lot of bad words here (sorry<3)
+
 There are two main functionalities that can be found in `src`. First one is censoring (finding the uncesored words) and
 second one is grammar correction.
 
@@ -92,3 +96,7 @@ tittywank
 titwank
 ```
 
+# Contributors and Contributions
+![Contributors](https://img.shields.io/github/contributors/grumpycatyo-collab/spam_filter_epetitions)
+
+All contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome.
