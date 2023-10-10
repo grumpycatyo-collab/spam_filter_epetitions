@@ -72,6 +72,7 @@ Now about the main function that does all this together:
 from filtering import filter_spam
 
 seq = "Счастье в мелочах, бля"
+print(filter_spam(seq))
 ```
 
 ```
