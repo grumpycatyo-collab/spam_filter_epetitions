@@ -3,7 +3,7 @@ Spam Filter is a microservice made specifically for the E-petitions Project made
 
 ## Contents
 - [Conventions](#conventions)
-- [Run Project](#runproject)
+- [Run Project](#run-project)
 - [Usages](#usages)
 - [Data](#data)
 - [Contributors and Contributions](#contributors-and-contributions)
