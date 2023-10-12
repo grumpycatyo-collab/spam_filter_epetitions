@@ -1,8 +1,8 @@
 from difflib import get_close_matches
 import re
 
-route_ro = r'C:\Users\Max\spam_filter_epetitions\data\md_ro.txt'
-route_ru = r'C:\Users\Max\spam_filter_epetitions\data\rus.txt'
+route_ro = r'data/md_ro.txt'
+route_ru = r'data/rus.txt'
 
 file1 = open(route_ro, 'r', encoding='utf-8')
 censored_words_ro = file1.read().splitlines()
