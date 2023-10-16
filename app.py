@@ -11,7 +11,7 @@ from utils.similarity import has_cyrillic
 async def echo(websocket) -> None:
     async for message in websocket:
         string = filter_spam(message)
-        await websocket.send(message)
+        await websocket.send(string)
 
 
 if __name__ == "__main__":
