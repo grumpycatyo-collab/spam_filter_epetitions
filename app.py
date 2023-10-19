@@ -14,12 +14,5 @@ async def echo(websocket) -> None:
         await websocket.send(string)
 
 
-async def main(func1, func2) -> None:
-    await asyncio.gather(func1, func2)
-
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    try:
-        loop.run_until_complete(main(server("localhost", 8567, echo), server("localhost", 8566, echo)))
-    finally:
-        loop.close()
+    asyncio.run(server("0.0.0.0", 8567, echo))
