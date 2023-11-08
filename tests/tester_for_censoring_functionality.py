@@ -1,16 +1,34 @@
-from utils.similarity import is_it_similar
-# route = r'C:\Users\Max\spam_filter_epetitions\data\modified_words.txt'
-# with open(route, 'r', encoding='utf-8') as file:
-#     words = file.read().splitlines()
-#
-# errors = []
-# for word in words:
-#     if is_it_similar(word):
-#         errors.append(word)
-str = "пизд"
-print(is_it_similar(str))
+import phunspell
+from utils.tokenizer import tokenize_sentence
+from utils.tokenizer import remove_special_symbols
 
-#
-# with open(r'C:\Users\Max\spam_filter_epetitions\data\sewarradawoedds.txt', 'w', encoding='utf-8') as file:
-#     for err in errors:
-#         file.write(err + '\n')
+
+def print_all_necessary(seq_dirt, lang):
+    """
+    Print all necessary information for a given sequence in a specified language.
+
+    Args:
+        seq_dirt (str): The sequence to check for errors.
+        lang (str): The language of the sequence.
+
+    Returns:
+        list:
+        - If there are no errors in the sequence, return empty.
+        - If there are errors in the sequence, return a list of suggestions.
+
+    """
+
+    pspell = phunspell.Phunspell(lang)
+
+    seq = remove_special_symbols(seq_dirt)
+    arr_seq = tokenize_sentence(seq)
+    clean_seq = []
+    [clean_seq.append(x) for x in arr_seq if x not in clean_seq]
+    listWords = []
+    mispelled = pspell.lookup_list(clean_seq)
+    for word in mispelled:
+        suggestions = []
+        for suggestion in pspell.suggest(word):
+            suggestions.append(suggestion)
+        listWords.append({word: suggestions[:2]})
+    return listWords

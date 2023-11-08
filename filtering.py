@@ -5,9 +5,10 @@ from utils.similarity import has_cyrillic
 
 def filter_spam(message):
     if has_cyrillic(message):
-        grammar_result = print_all_necessary(message, 'ru-RU')
+        grammar_result = print_all_necessary(message, 'ru_RU')
     else:
-        grammar_result = print_all_necessary(message, 'ro-RO')
+        grammar_result = print_all_necessary(message, 'ro_RO')
     censoring_result = check_censoring(message)
     string = f'{censoring_result} / {grammar_result}'
     return string
+

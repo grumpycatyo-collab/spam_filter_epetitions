@@ -1,31 +1,34 @@
-import language_tool_python
+import phunspell
+from utils.tokenizer import tokenize_sentence
+from utils.tokenizer import remove_special_symbols
 
 
-def print_all_necessary(seq, lang):
+def print_all_necessary(seq_dirt, lang):
     """
     Print all necessary information for a given sequence in a specified language.
 
     Args:
-        seq (str): The sequence to check for errors.
+        seq_dirt (str): The sequence to check for errors.
         lang (str): The language of the sequence.
 
     Returns:
-        bool or list:
-        - If there are no errors in the sequence, return False.
-        - If there are errors in the sequence, return a list of dictionaries containing the error information.
-          Each dictionary includes the offset of the error, the length of the error, and suggestions for replacement.
+        list:
+        - If there are no errors in the sequence, return empty.
+        - If there are errors in the sequence, return a list of suggestions.
 
     """
-    tool = language_tool_python.LanguageTool(lang)
-    matches_data = []
-    errors = tool.check(seq)
-    if len(errors) == 0:
-        return False
-    else:
-        for error in errors:
-            matches_data.append({
-                "offset": error.offset,
-                "errorLength": error.errorLength,
-                "suggestions": error.replacements
-            })
-        return matches_data
+
+    pspell = phunspell.Phunspell(lang)
+
+    seq = remove_special_symbols(seq_dirt)
+    arr_seq = tokenize_sentence(seq)
+    clean_seq = []
+    [clean_seq.append(x) for x in arr_seq if x not in clean_seq]
+    listWords = []
+    mispelled = pspell.lookup_list(clean_seq)
+    for word in mispelled:
+        suggestions = []
+        for suggestion in pspell.suggest(word):
+            suggestions.append(suggestion)
+        listWords.append({word: suggestions[:2]})
+    return listWords
