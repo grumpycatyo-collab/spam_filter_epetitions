@@ -1,4 +1,4 @@
-import phunspell
+from phunspell import Phunspell
 from utils.tokenizer import tokenize_sentence
 from utils.tokenizer import remove_special_symbols
 
@@ -18,7 +18,7 @@ def print_all_necessary(seq_dirt, lang):
 
     """
 
-    pspell = phunspell.Phunspell(lang)
+    pspell = Phunspell(lang)
 
     seq = remove_special_symbols(seq_dirt)
     arr_seq = tokenize_sentence(seq)
